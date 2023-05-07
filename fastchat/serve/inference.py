@@ -90,11 +90,13 @@ def generate_stream(model, tokenizer, params, device,
             # Switch to CPU by avoiding some bugs in mps backend.
             last_token_logits = last_token_logits.float().to("cpu")
 
-        if temperature < 1e-4:
+        if temperature < 1e-4: #0.0001
             token = int(torch.argmax(last_token_logits))
         else:
             probs = torch.softmax(last_token_logits / temperature, dim=-1)
-            token = int(torch.multinomial(probs, num_samples=1))
+            samples = torch.multinomial(probs, num_samples=3)
+            print(samples)
+            token = int(samples[1])
 
         output_ids.append(token)  # 15043 = Hello
 

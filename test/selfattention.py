@@ -43,6 +43,6 @@ if __name__ == "__main__":
     self_attn = SelfAttention(embed_dim)
 
     # 进行 Self-Attention 计算
-    output_tensor = self_attn(input_tensor)
+    output_tensor = self_attn(input_tensor)  # cls call forward
 
     print(output_tensor.shape)  # 输出应为 batch_size x seq_len x embed_dim
